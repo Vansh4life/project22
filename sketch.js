@@ -32,7 +32,7 @@ function setup() {
   engine = Engine.create();
   world = engine.world;
   
-  star = Bodies.rect(width/2 , 200 , 5 , {restitution:0.4, isStatic:true});
+  star = Bodies.rectangle(width/2 , 200 , 5 , {restitution:0.4, isStatic:true});
 	World.add(world, star);
 
   Engine.run(engine);
@@ -46,6 +46,10 @@ function draw() {
   star.x= star.position.x; 
   star.y= star.position.y;
 
+  if(star.y > 200 && star.position.y > 200){
+    Matter.Body.setStatic(star,true);
+  }
+
   drawSprites();
 
   
@@ -55,11 +59,11 @@ function keyPressed(){
 	if(keyCode===LEFT_ARROW){
 		fairy.x = fairy.x - 20;
 	}
-else if(keyCode===RIGHT_ARROW){
+if(keyCode===RIGHT_ARROW){
 	fairy.x = fairy.x + 20;
 }
 
-else if(keyCode===DOWN_ARROW){
+if(keyCode===DOWN_ARROW){
 	Matter.Body.setStatic(star,false);
 }
 
